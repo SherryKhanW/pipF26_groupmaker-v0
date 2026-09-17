@@ -23,6 +23,29 @@ h1 {
   margin-top: 0;
 }
 
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1rem 0 1.5rem;
+}
+
+.controls label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.controls input {
+  width: 4rem;
+  font-size: 1rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #d4d4e0;
+  border-radius: 8px;
+}
+
 .randomize {
   font-size: 1rem;
   padding: 0.6rem 1.2rem;
@@ -31,7 +54,6 @@ h1 {
   background: #4f46e5;
   color: white;
   cursor: pointer;
-  margin: 1rem 0 1.5rem;
 }
 
 .randomize:disabled {
@@ -73,6 +95,68 @@ h1 {
 
 .error {
   color: #b3261e;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #4f46e5;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 0 0 1rem;
+}
+
+.survey {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 420px;
+  margin-top: 0.5rem;
+}
+
+.survey label,
+.survey fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.survey fieldset {
+  border: 1px solid #e3e3ee;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  background: white;
+}
+
+.survey select {
+  font-size: 1rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #d4d4e0;
+  border-radius: 8px;
+}
+
+.scale {
+  display: flex;
+  gap: 1rem;
+}
+
+.scale-option {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 0.35rem !important;
+}
+
+.hint {
+  margin: 0;
+  color: #555;
+  font-size: 0.85rem;
+}
+
+.confirm {
+  margin-top: 1.5rem;
+  font-size: 1.05rem;
 }
 
 @media (max-width: 640px) {

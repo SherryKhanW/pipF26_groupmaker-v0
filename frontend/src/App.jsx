@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
+import Survey from './Survey.jsx'
 
 export default function App() {
   const [roster, setRoster] = useState(null)
   const [groups, setGroups] = useState(null)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [groupSize, setGroupSize] = useState(4)
+  const [view, setView] = useState('home')
 
   useEffect(() => {
     fetch('/api/roster')
@@ -23,7 +26,7 @@ export default function App() {
       const res = await fetch('/api/groups/randomize', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ group_size: 4 }),
+        body: JSON.stringify({ group_size: groupSize }),
       })
       if (!res.ok) throw new Error(`Backend responded ${res.status}`)
       const data = await res.json()
@@ -33,6 +36,10 @@ export default function App() {
     } finally {
       setLoading(false)
     }
+  }
+
+  if (view === 'survey') {
+    return <Survey onBack={() => setView('home')} />
   }
 
   if (error) {
@@ -59,10 +66,26 @@ export default function App() {
     <main className="page">
       <h1>GroupMaker</h1>
       <p className="subtitle">{roster.course}</p>
-
-      <button className="randomize" onClick={randomize} disabled={loading}>
-        {loading ? 'Randomizing…' : 'Randomize Groups'}
+      <button type="button" className="nav-link" onClick={() => setView('survey')}>
+        Survey
       </button>
+
+      <div className="controls">
+        <label htmlFor="group-size">
+          Group size
+          <input
+            id="group-size"
+            type="number"
+            min={2}
+            max={10}
+            value={groupSize}
+            onChange={(e) => setGroupSize(Number(e.target.value))}
+          />
+        </label>
+        <button className="randomize" onClick={randomize} disabled={loading}>
+          {loading ? 'Randomizing…' : 'Randomize Groups'}
+        </button>
+      </div>
 
       {groups ? (
         <section className="groups">
